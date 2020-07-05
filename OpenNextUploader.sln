@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpennextUploader", "Demo\OpennextUploader.csproj", "{6BC98275-D540-42C6-996D-15D0A5BF2110}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{2EA1AA74-A6A5-4720-9FCA-79BC33B07F1B}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+		VersionHistory.md = VersionHistory.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{8B6344A3-7223-4BFD-AE3A-66212F316809}"
+	ProjectSection(SolutionItems) = preProject
+		Images\SolutionExplorer.png = Images\SolutionExplorer.png
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "Api\API.csproj", "{441342CC-529B-4AC1-8FA6-446697E2C39E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C286BFDF-6C98-45E2-BDEB-4008D07743CE}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{E6E4E025-8A5D-4EA2-8FAF-B24E5429D9A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BC98275-D540-42C6-996D-15D0A5BF2110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BC98275-D540-42C6-996D-15D0A5BF2110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BC98275-D540-42C6-996D-15D0A5BF2110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BC98275-D540-42C6-996D-15D0A5BF2110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{441342CC-529B-4AC1-8FA6-446697E2C39E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{441342CC-529B-4AC1-8FA6-446697E2C39E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{441342CC-529B-4AC1-8FA6-446697E2C39E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{441342CC-529B-4AC1-8FA6-446697E2C39E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E4E025-8A5D-4EA2-8FAF-B24E5429D9A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E4E025-8A5D-4EA2-8FAF-B24E5429D9A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E4E025-8A5D-4EA2-8FAF-B24E5429D9A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E4E025-8A5D-4EA2-8FAF-B24E5429D9A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8B6344A3-7223-4BFD-AE3A-66212F316809} = {2EA1AA74-A6A5-4720-9FCA-79BC33B07F1B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {06A7E42F-F9BE-47C9-8AE8-71DF2132F41E}
+	EndGlobalSection
+EndGlobal

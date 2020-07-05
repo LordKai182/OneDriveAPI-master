@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.AuthenticationBrowser = new System.Windows.Forms.WebBrowser();
             this.Step1Button = new System.Windows.Forms.Button();
             this.CurrentUrlTextBox = new System.Windows.Forms.TextBox();
@@ -46,6 +48,14 @@
             this.UploadButton = new System.Windows.Forms.Button();
             this.UseProxyCheckBox = new System.Windows.Forms.CheckBox();
             this.OneDriveTypeCombo = new System.Windows.Forms.ComboBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.Menu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Abrir = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConfigurarAmbiente = new System.Windows.Forms.ToolStripMenuItem();
+            this.Log = new System.Windows.Forms.ToolStripMenuItem();
+            this.TokenReFresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.Sair = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // AuthenticationBrowser
@@ -231,7 +241,6 @@
             this.UseProxyCheckBox.TabIndex = 18;
             this.UseProxyCheckBox.Text = "Use Proxy";
             this.UseProxyCheckBox.UseVisualStyleBackColor = true;
-            this.UseProxyCheckBox.CheckedChanged += new System.EventHandler(this.UseProxyCheckBox_CheckedChanged);
             // 
             // OneDriveTypeCombo
             // 
@@ -246,6 +255,57 @@
             this.OneDriveTypeCombo.Name = "OneDriveTypeCombo";
             this.OneDriveTypeCombo.Size = new System.Drawing.Size(335, 24);
             this.OneDriveTypeCombo.TabIndex = 19;
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.Menu;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "One Drive OpenNext";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
+            // Menu
+            // 
+            this.Menu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Abrir,
+            this.ConfigurarAmbiente,
+            this.Log,
+            this.TokenReFresh,
+            this.Sair});
+            this.Menu.Name = "Menu";
+            this.Menu.Size = new System.Drawing.Size(218, 152);
+            // 
+            // Abrir
+            // 
+            this.Abrir.Name = "Abrir";
+            this.Abrir.Size = new System.Drawing.Size(217, 24);
+            this.Abrir.Text = "Abrir";
+            // 
+            // ConfigurarAmbiente
+            // 
+            this.ConfigurarAmbiente.Name = "ConfigurarAmbiente";
+            this.ConfigurarAmbiente.Size = new System.Drawing.Size(217, 24);
+            this.ConfigurarAmbiente.Text = "Configurar Ambiente";
+            // 
+            // Log
+            // 
+            this.Log.Name = "Log";
+            this.Log.Size = new System.Drawing.Size(217, 24);
+            this.Log.Text = "Exibir Log";
+            // 
+            // TokenReFresh
+            // 
+            this.TokenReFresh.Name = "TokenReFresh";
+            this.TokenReFresh.Size = new System.Drawing.Size(217, 24);
+            this.TokenReFresh.Text = "Refresh Token";
+            // 
+            // Sair
+            // 
+            this.Sair.Name = "Sair";
+            this.Sair.Size = new System.Drawing.Size(217, 24);
+            this.Sair.Text = "Sair";
+            this.Sair.Click += new System.EventHandler(this.Sair_Click);
             // 
             // MainForm
             // 
@@ -270,12 +330,17 @@
             this.Controls.Add(this.CurrentUrlTextBox);
             this.Controls.Add(this.Step1Button);
             this.Controls.Add(this.AuthenticationBrowser);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MinimumSize = new System.Drawing.Size(381, 309);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OneDrive API OpenNext";
+            this.MinimumSizeChanged += new System.EventHandler(this.MainForm_MinimumSizeChanged);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
+            this.Menu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,6 +366,13 @@
         private System.Windows.Forms.Button CreateFolderButton;
         private System.Windows.Forms.CheckBox UseProxyCheckBox;
         private System.Windows.Forms.ComboBox OneDriveTypeCombo;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip Menu;
+        private System.Windows.Forms.ToolStripMenuItem Abrir;
+        private System.Windows.Forms.ToolStripMenuItem ConfigurarAmbiente;
+        private System.Windows.Forms.ToolStripMenuItem Log;
+        private System.Windows.Forms.ToolStripMenuItem TokenReFresh;
+        private System.Windows.Forms.ToolStripMenuItem Sair;
     }
 }
 

@@ -7,6 +7,7 @@ using KoenZomers.OneDrive.Api.Entities;
 using KoenZomers.OneDrive.Api.Enums;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace KoenZomers.OneDrive.AuthenticatorApp
 {
@@ -72,9 +73,16 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // Reset any possible access tokens we may already have
-       
+            this.Visible = false;
+            this.ShowInTaskbar = false;
+            this.WindowState = FormWindowState.Minimized;
+            notifyIcon1.Visible = true;
+            // notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem { Name = "AAAA" });
             // Make the Graph API the default choice
+            //notifyIcon1.Icon = Resoucer
+            notifyIcon1.BalloonTipTitle = "OneDrive OpenNext";
+            notifyIcon1.BalloonTipText = "OneDrive OpenNext Iniciado.";
+            notifyIcon1.ShowBalloonTip(1000);
             OneDriveTypeCombo.SelectedIndex = OneDriveTypeCombo.Items.Count - 1;
             var teste = GetAuthCode();
             AccessTokenTextBox.Text = teste.Result;
@@ -171,7 +179,11 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
             //OneDriveCommandsPanel.Enabled = accessTokenAvailable;
             AuthenticationBrowser.Visible = !accessTokenAvailable;
             JsonResultTextBox.Visible = accessTokenAvailable;
-            JsonResultTextBox.Text = "Connected";
+            JsonResultTextBox.Text = "Conectado com Sucesso...";
+            //notifyIcon1.Icon = SystemIcons.Information;
+            notifyIcon1.BalloonTipTitle = "OneDrive OpenNext";
+            notifyIcon1.BalloonTipText = "Conectado com Sucesso...";
+            notifyIcon1.ShowBalloonTip(20000);
         }
 
       
@@ -270,14 +282,43 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
             return completion.Task;
         }
 
-        private void RemovePermissionsButton_Click(object sender, EventArgs e)
-        {
+      
 
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Visible = true;
+            this.WindowState = FormWindowState.Normal;
+            this.ShowInTaskbar = true;
+            notifyIcon1.Visible = false;
         }
 
-        private void UseProxyCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void MainForm_MinimumSizeChanged(object sender, EventArgs e)
         {
+            //MessageBox.Show("sdsddsd");
+        }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true; // Cancelar o fechamento do form
+            Hide(); // Ocultar o form
+                    // use this.WindowState = FormWindowState.Minimized; para minimizar
+            notifyIcon1.Visible = true; // Mostrar o notify icon
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Visible = false;
+                this.ShowInTaskbar = false;
+                this.WindowState = FormWindowState.Minimized;
+                notifyIcon1.Visible = true;
+            }
+        }
+
+        private void Sair_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

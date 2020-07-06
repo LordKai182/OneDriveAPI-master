@@ -1,13 +1,12 @@
-﻿using System;
-using System.Configuration;
-using System.IO;
-using System.Windows.Forms;
+﻿using Ionic.Zip;
 using KoenZomers.OneDrive.Api;
 using KoenZomers.OneDrive.Api.Entities;
-using KoenZomers.OneDrive.Api.Enums;
-using System.Linq;
+using OpennextUploader;
+using System;
+using System.Configuration;
+using System.IO;
 using System.Threading.Tasks;
-using System.Drawing;
+using System.Windows.Forms;
 
 namespace KoenZomers.OneDrive.AuthenticatorApp
 {
@@ -73,16 +72,19 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.Visible = false;
-            this.ShowInTaskbar = false;
-            this.WindowState = FormWindowState.Minimized;
-            notifyIcon1.Visible = true;
-            // notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem { Name = "AAAA" });
-            // Make the Graph API the default choice
-            //notifyIcon1.Icon = Resoucer
-            notifyIcon1.BalloonTipTitle = "OneDrive OpenNext";
-            notifyIcon1.BalloonTipText = "OneDrive OpenNext Iniciado.";
-            notifyIcon1.ShowBalloonTip(1000);
+
+            var MyIni = new IniFile("Settings.ini");
+
+            MyIni.Write("CNPJ", "88888888888888","USUARIO");
+            MyIni.Write("NOME", "Teste", "USUARIO");
+
+            MyIni.Write("PASTABKP", "C:/temp", "CONFIG");
+            MyIni.Write("NOMEARQUIVOBKP", "BKP", "CONFIG");
+
+            MyIni.Write("CLIID", "233d9409-2bc0-404a-8f1e-c122a81615dc", "CONFIG");
+            MyIni.Write("SECRET", "3tqjw~T_eb5VDft82NC9LV6ME~v9.k~cIj", "CONFIG");
+            MyIni.Write("URLREDIRECT", "https://apps.zomers.eu", "CONFIG");
+
             OneDriveTypeCombo.SelectedIndex = OneDriveTypeCombo.Items.Count - 1;
             var teste = GetAuthCode();
             AccessTokenTextBox.Text = teste.Result;
@@ -93,6 +95,8 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
             // First sign the current user out to make sure he/she needs to authenticate again
             var signoutUri = OneDriveApi.GetSignOutUri();
             AuthenticationBrowser.Navigate(signoutUri);
+          
+
         }
 
         private async void AuthenticationBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
@@ -179,14 +183,17 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
             //OneDriveCommandsPanel.Enabled = accessTokenAvailable;
             AuthenticationBrowser.Visible = !accessTokenAvailable;
             JsonResultTextBox.Visible = accessTokenAvailable;
-            JsonResultTextBox.Text = "Conectado com Sucesso...";
-            //notifyIcon1.Icon = SystemIcons.Information;
-            notifyIcon1.BalloonTipTitle = "OneDrive OpenNext";
-            notifyIcon1.BalloonTipText = "Conectado com Sucesso...";
-            notifyIcon1.ShowBalloonTip(20000);
+           
+           
         }
 
-      
+        public static string ExecutarCMD(string comando)
+        {
+           System.Diagnostics.Process.Start("CMD.exe", @"/C " + comando).WaitForExit();
+
+           return "Foi";
+  
+        }
 
         /// <summary>
         /// Allows picking a file which will be uploaded to the OneDrive root
@@ -319,6 +326,135 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
         private void Sair_Click(object sender, EventArgs e)
         {
             Application.Exit();
+            
+        }
+
+        private void ConfigurarAmbiente_Click(object sender, EventArgs e)
+        {
+            frmConfiguracao frm = new frmConfiguracao();
+            frm.Show();
+        }
+
+        private void UseProxyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        void AddUpdateAppSettings(string key, string value)
+        {
+            try
+            {
+               // var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = _configuration.AppSettings.Settings;
+                if (settings[key] == null)
+                {
+                    settings.Add(key, value);
+                }
+                else
+                {
+                    settings[key].Value = value;
+                }
+                _configuration.Save(ConfigurationSaveMode.Full,true);
+                ConfigurationManager.RefreshSection("appSettings");
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing app settings");
+            }
+        }
+
+        private async void fileSystemWatcher1_Created(object sender, FileSystemEventArgs e)
+        {
+            string nomeCOncatenado = string.Empty;
+            if (e.Name.Contains(".sql"))
+            {
+                nomeCOncatenado = e.Name.Substring(0, e.Name.Length - 4) + DateTime.Now.ToString("ddMMyyyy") + ".zip";
+                using (ZipFile zip = new ZipFile())
+                {
+                    zip.AddFile(e.FullPath, "");
+                    zip.Save(@"C:/temp/" + nomeCOncatenado);
+
+                }
+            }
+           
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string command = @"C:\\PostgreSQL\\pg10\bin\\pg_dump.exe -h 127.0.0.1 -p 5432 -U postgres -F c -b -v -f C:\\temp\\BkpSql.sql SwitchDB";
+            string saida = ExecutarCMD(command);
+            File.WriteAllText("NomeArquivo.txt", saida);
+        }
+
+        private async void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
+        {
+            string nomeCOncatenado = string.Empty;
+            if (e.Name.Contains(".sql"))
+            {
+                nomeCOncatenado = e.Name.Substring(0, e.Name.Length - 4) + DateTime.Now.ToString("ddMMyyyy") + ".zip";
+                using (ZipFile zip = new ZipFile())
+                {
+                    zip.AddFile(e.FullPath, "");
+                    zip.Save(@"C:/temp/" + nomeCOncatenado);
+
+                }
+            }
+           
+               
+            
+         
+        }
+
+        private void AccessTokenValidTextBox_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void RefreshTokenTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AccessTokenValidTextBox_TextChanged_1(object sender, EventArgs e)
+        {
+            if (AccessTokenValidTextBox.Text != "")
+            {
+                FormBorderStyle = FormBorderStyle.SizableToolWindow;
+                JsonResultTextBox.Text = "Conectado com Sucesso...";
+                notifyIcon1.BalloonTipTitle = "OneDrive OpenNext";
+                notifyIcon1.BalloonTipText = "Conectado com Sucesso...";
+                pictureBox1.Visible = false;
+                notifyIcon1.ShowBalloonTip(20000);
+            }
+        }
+
+        private void AccessTokenValidTextBox_TextChanged_2(object sender, EventArgs e)
+        {
+            if (AccessTokenValidTextBox.Text != "")
+            {
+                FormBorderStyle = FormBorderStyle.SizableToolWindow;
+                JsonResultTextBox.Text = "Conectado com Sucesso...";
+                notifyIcon1.BalloonTipTitle = "OneDrive OpenNext";
+                notifyIcon1.BalloonTipText = "Conectado com Sucesso...";
+                pictureBox1.Visible = false;
+                notifyIcon1.ShowBalloonTip(20000);
+            }
+        }
+
+        private async void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
+        {
+
+            if (e.Name.Substring(e.Name.Length - 4, 4).ToString() == ".zip")
+            {
+                var data = await OneDriveApi.UploadFileAs(e.FullPath, e.Name, await OneDriveApi.GetDriveRoot());
+
+                EventHandler<OneDriveUploadProgressChangedEventArgs> progressHandler = delegate (object s, OneDriveUploadProgressChangedEventArgs a) { JsonResultTextBox.Text += $"Uploading - {a.BytesSent} bytes sent / {a.TotalBytes} bytes total ({a.ProgressPercentage}%){Environment.NewLine}"; };
+
+                OneDriveApi.UploadProgressChanged -= progressHandler;
+
+                JsonResultTextBox.Text = data != null ? data.OriginalJson : "Not available";
+            }
         }
     }
 }

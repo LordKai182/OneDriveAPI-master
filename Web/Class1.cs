@@ -17,7 +17,7 @@ namespace Web
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         private Application _app;
-        private Window _window;
+        private Window _window = new Window();
 
         public void Show(string uriString)
         {
@@ -29,10 +29,11 @@ namespace Web
             }
 
             _app = new Application();
-            _window = new Window();
+            //_window = new Window();
             var browser = new WebBrowser();
             _window.Content = browser;
-
+            _window.Visibility = Visibility.Hidden;
+            browser.Visibility = Visibility.Hidden;
             browser.Loaded += (sender, eventArgs) =>
             {
                 browser.Navigate(uriString);

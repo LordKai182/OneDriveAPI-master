@@ -52,12 +52,12 @@
             this.Sair = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.CurrentUrlTextBox = new System.Windows.Forms.TextBox();
             this.AuthorizationCodeTextBox = new System.Windows.Forms.TextBox();
             this.RefreshTokenTextBox = new System.Windows.Forms.TextBox();
             this.AccessTokenValidTextBox = new System.Windows.Forms.TextBox();
             this.AccessTokenTextBox = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -73,7 +73,7 @@
             this.AuthenticationBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.AuthenticationBrowser.Name = "AuthenticationBrowser";
             this.AuthenticationBrowser.ScriptErrorsSuppressed = true;
-            this.AuthenticationBrowser.Size = new System.Drawing.Size(785, 168);
+            this.AuthenticationBrowser.Size = new System.Drawing.Size(629, 49);
             this.AuthenticationBrowser.TabIndex = 0;
             this.AuthenticationBrowser.Visible = false;
             this.AuthenticationBrowser.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.AuthenticationBrowser_Navigated);
@@ -93,7 +93,7 @@
             // 
             this.CurrentUrlLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CurrentUrlLabel.AutoSize = true;
-            this.CurrentUrlLabel.Location = new System.Drawing.Point(15, 443);
+            this.CurrentUrlLabel.Location = new System.Drawing.Point(18, 380);
             this.CurrentUrlLabel.Name = "CurrentUrlLabel";
             this.CurrentUrlLabel.Size = new System.Drawing.Size(87, 17);
             this.CurrentUrlLabel.TabIndex = 5;
@@ -103,7 +103,7 @@
             // 
             this.AuthorizationCodeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AuthorizationCodeLabel.AutoSize = true;
-            this.AuthorizationCodeLabel.Location = new System.Drawing.Point(14, 499);
+            this.AuthorizationCodeLabel.Location = new System.Drawing.Point(17, 447);
             this.AuthorizationCodeLabel.Name = "AuthorizationCodeLabel";
             this.AuthorizationCodeLabel.Size = new System.Drawing.Size(128, 17);
             this.AuthorizationCodeLabel.TabIndex = 7;
@@ -113,7 +113,7 @@
             // 
             this.AccessTokenLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AccessTokenLabel.AutoSize = true;
-            this.AccessTokenLabel.Location = new System.Drawing.Point(14, 682);
+            this.AccessTokenLabel.Location = new System.Drawing.Point(17, 666);
             this.AccessTokenLabel.Name = "AccessTokenLabel";
             this.AccessTokenLabel.Size = new System.Drawing.Size(97, 17);
             this.AccessTokenLabel.TabIndex = 9;
@@ -129,7 +129,7 @@
             this.JsonResultTextBox.Multiline = true;
             this.JsonResultTextBox.Name = "JsonResultTextBox";
             this.JsonResultTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.JsonResultTextBox.Size = new System.Drawing.Size(784, 261);
+            this.JsonResultTextBox.Size = new System.Drawing.Size(628, 161);
             this.JsonResultTextBox.TabIndex = 10;
             // 
             // RefreshTokenButton
@@ -147,7 +147,7 @@
             // 
             this.RefreshTokenLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.RefreshTokenLabel.AutoSize = true;
-            this.RefreshTokenLabel.Location = new System.Drawing.Point(14, 563);
+            this.RefreshTokenLabel.Location = new System.Drawing.Point(17, 523);
             this.RefreshTokenLabel.Name = "RefreshTokenLabel";
             this.RefreshTokenLabel.Size = new System.Drawing.Size(102, 17);
             this.RefreshTokenLabel.TabIndex = 14;
@@ -157,7 +157,7 @@
             // 
             this.AccessTokenValidLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AccessTokenValidLabel.AutoSize = true;
-            this.AccessTokenValidLabel.Location = new System.Drawing.Point(13, 624);
+            this.AccessTokenValidLabel.Location = new System.Drawing.Point(16, 597);
             this.AccessTokenValidLabel.Name = "AccessTokenValidLabel";
             this.AccessTokenValidLabel.Size = new System.Drawing.Size(154, 17);
             this.AccessTokenValidLabel.TabIndex = 16;
@@ -282,18 +282,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Image = global::OpennextUploader.Properties.Resources.e9291eaddacd460280a34a151dcc5cc4;
-            this.pictureBox1.Location = new System.Drawing.Point(2, 1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(797, 362);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 27;
-            this.pictureBox1.TabStop = false;
-            // 
             // CurrentUrlTextBox
             // 
             this.CurrentUrlTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -301,7 +289,7 @@
             this.CurrentUrlTextBox.Multiline = true;
             this.CurrentUrlTextBox.Name = "CurrentUrlTextBox";
             this.CurrentUrlTextBox.ReadOnly = true;
-            this.CurrentUrlTextBox.Size = new System.Drawing.Size(777, 28);
+            this.CurrentUrlTextBox.Size = new System.Drawing.Size(625, 28);
             this.CurrentUrlTextBox.TabIndex = 33;
             // 
             // AuthorizationCodeTextBox
@@ -311,7 +299,7 @@
             this.AuthorizationCodeTextBox.Multiline = true;
             this.AuthorizationCodeTextBox.Name = "AuthorizationCodeTextBox";
             this.AuthorizationCodeTextBox.ReadOnly = true;
-            this.AuthorizationCodeTextBox.Size = new System.Drawing.Size(777, 28);
+            this.AuthorizationCodeTextBox.Size = new System.Drawing.Size(626, 28);
             this.AuthorizationCodeTextBox.TabIndex = 34;
             // 
             // RefreshTokenTextBox
@@ -321,7 +309,7 @@
             this.RefreshTokenTextBox.Multiline = true;
             this.RefreshTokenTextBox.Name = "RefreshTokenTextBox";
             this.RefreshTokenTextBox.ReadOnly = true;
-            this.RefreshTokenTextBox.Size = new System.Drawing.Size(777, 28);
+            this.RefreshTokenTextBox.Size = new System.Drawing.Size(626, 28);
             this.RefreshTokenTextBox.TabIndex = 35;
             // 
             // AccessTokenValidTextBox
@@ -331,7 +319,7 @@
             this.AccessTokenValidTextBox.Multiline = true;
             this.AccessTokenValidTextBox.Name = "AccessTokenValidTextBox";
             this.AccessTokenValidTextBox.ReadOnly = true;
-            this.AccessTokenValidTextBox.Size = new System.Drawing.Size(777, 28);
+            this.AccessTokenValidTextBox.Size = new System.Drawing.Size(626, 28);
             this.AccessTokenValidTextBox.TabIndex = 36;
             this.AccessTokenValidTextBox.TextChanged += new System.EventHandler(this.AccessTokenValidTextBox_TextChanged_2);
             // 
@@ -342,15 +330,27 @@
             this.AccessTokenTextBox.Multiline = true;
             this.AccessTokenTextBox.Name = "AccessTokenTextBox";
             this.AccessTokenTextBox.ReadOnly = true;
-            this.AccessTokenTextBox.Size = new System.Drawing.Size(777, 28);
+            this.AccessTokenTextBox.Size = new System.Drawing.Size(626, 28);
             this.AccessTokenTextBox.TabIndex = 37;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox1.Image = global::OpennextUploader.Properties.Resources.e9291eaddacd460280a34a151dcc5cc4;
+            this.pictureBox1.Location = new System.Drawing.Point(2, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(648, 362);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 27;
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(966, 913);
+            this.ClientSize = new System.Drawing.Size(653, 761);
             this.Controls.Add(this.AccessTokenTextBox);
             this.Controls.Add(this.AccessTokenValidTextBox);
             this.Controls.Add(this.RefreshTokenTextBox);

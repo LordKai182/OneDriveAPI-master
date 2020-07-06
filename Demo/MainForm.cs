@@ -3,9 +3,12 @@ using KoenZomers.OneDrive.Api;
 using KoenZomers.OneDrive.Api.Entities;
 using OpennextUploader;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace KoenZomers.OneDrive.AuthenticatorApp
@@ -95,7 +98,10 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
             // First sign the current user out to make sure he/she needs to authenticate again
             var signoutUri = OneDriveApi.GetSignOutUri();
             AuthenticationBrowser.Navigate(signoutUri);
-          
+
+           
+            
+
 
         }
 
@@ -201,7 +207,7 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
         private async void UploadButton_Click(object sender, EventArgs e)
         {
             var fileToUpload = SelectLocalFile();
-
+            var MyIni = new IniFile("Settings.ini");
             // Reset the output field
             JsonResultTextBox.Text = $"Starting upload{Environment.NewLine}";
 
@@ -212,7 +218,7 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
             OneDriveApi.UploadProgressChanged += progressHandler;
 
             // Upload the file to the root of the OneDrive
-            var data = await OneDriveApi.UploadFile(fileToUpload, await OneDriveApi.GetDriveRoot());
+            var data = await OneDriveApi.UploadFile(fileToUpload, await OneDriveApi.GetFolderOrCreate(MyIni.Read("CNPJ", "USUARIO")));
 
             // Unsubscribe from the upload progress event
             OneDriveApi.UploadProgressChanged -= progressHandler;
@@ -243,6 +249,11 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
             JsonResultTextBox.Text = data != null ? data.OriginalJson : "Not available";
         }
 
+        private async void CreateNamedFolder(string NameFolder)
+        {
+            var data = await OneDriveApi.GetFolderOrCreate(NameFolder);
+            JsonResultTextBox.Text = data != null ? data.OriginalJson : "Not available";
+        }
      
 
         private static Task<string> GetAuthCode()
@@ -429,16 +440,18 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
             }
         }
 
-        private void AccessTokenValidTextBox_TextChanged_2(object sender, EventArgs e)
+        private async void AccessTokenValidTextBox_TextChanged_2(object sender, EventArgs e)
         {
             if (AccessTokenValidTextBox.Text != "")
             {
+                var MyIni = new IniFile("Settings.ini");
                 FormBorderStyle = FormBorderStyle.SizableToolWindow;
                 JsonResultTextBox.Text = "Conectado com Sucesso...";
                 notifyIcon1.BalloonTipTitle = "OneDrive OpenNext";
                 notifyIcon1.BalloonTipText = "Conectado com Sucesso...";
                 pictureBox1.Visible = false;
                 notifyIcon1.ShowBalloonTip(20000);
+                var data = await OneDriveApi.GetFolderOrCreate(MyIni.Read("CNPJ", "USUARIO"));
             }
         }
 
@@ -447,13 +460,14 @@ namespace KoenZomers.OneDrive.AuthenticatorApp
 
             if (e.Name.Substring(e.Name.Length - 4, 4).ToString() == ".zip")
             {
-                var data = await OneDriveApi.UploadFileAs(e.FullPath, e.Name, await OneDriveApi.GetDriveRoot());
+                var MyIni = new IniFile("Settings.ini");
+                var data = await OneDriveApi.UploadFileAs(e.FullPath, e.Name, await OneDriveApi.GetFolderOrCreate(MyIni.Read("CNPJ", "USUARIO")));
 
                 EventHandler<OneDriveUploadProgressChangedEventArgs> progressHandler = delegate (object s, OneDriveUploadProgressChangedEventArgs a) { JsonResultTextBox.Text += $"Uploading - {a.BytesSent} bytes sent / {a.TotalBytes} bytes total ({a.ProgressPercentage}%){Environment.NewLine}"; };
 
                 OneDriveApi.UploadProgressChanged -= progressHandler;
 
-                JsonResultTextBox.Text = data != null ? data.OriginalJson : "Not available";
+                //JsonResultTextBox.Text = data != null ? data.OriginalJson : "Not available";
             }
         }
     }
